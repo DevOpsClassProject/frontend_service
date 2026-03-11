@@ -12,7 +12,7 @@ COPY . .
 # 3. Quality Gates
 # This ensures no broken code or failing tests make it to the next stage
 RUN npm run lint || echo "Linting issues found, but continuing..."
-RUN npm test -- --watchAll=false
+RUN npm test
 
 # 4. Generate the production assets (creates the /build or /dist folder)
 RUN npm run build
