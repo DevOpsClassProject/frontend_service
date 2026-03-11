@@ -32,14 +32,21 @@ pipeline {
                 )
             }
         }
-
+        stage('Prepare Environment') {
+            steps {
+                echo 'Cleaning up dangling Docker networks...'
+                // -f (force) skips the confirmation prompt
+                // || true ensures the pipeline continues even if prune returns a non-zero exit code
+                sh 'docker network prune -f || true'
+            }
+        }
         stage('Deploy') {
             when { 
                 anyOf { branch 'develop'; branch 'main'; branch 'release/*' } 
             }
             steps {
                 echo "Deploying Frontend container..."
-                sh "docker-compose up -d ecommerce-frontend"
+                sh "docker compose up -d ecommerce-frontend"
             }
         }
     }
