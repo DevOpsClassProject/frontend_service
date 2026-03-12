@@ -14,10 +14,3 @@ networks:
   ecommerce-net:
     name: ecommerce-net
     driver: bridge
-
-# Define the database as an external service
-services:
-  ecommerce-product:
-    external: true
-  ecommerce-order:
-    external: true
