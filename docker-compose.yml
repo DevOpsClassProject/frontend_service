@@ -1,0 +1,16 @@
+services:
+  ecommerce-frontend:
+    image: ${REGISTRY_USER}/${IMAGE_NAME}:${BUILD_NUMBER}
+    container_name: ecommerce-frontend-container
+    ports:
+      - "3000:80"
+    networks:
+      - ecommerce-net
+    depends_on:
+      - ecommerce-product
+      - ecommerce-order
+
+networks:
+networks:
+  ecommerce-net:
+    external: true
